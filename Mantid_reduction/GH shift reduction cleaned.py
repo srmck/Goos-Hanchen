@@ -111,8 +111,9 @@ def plot_q(rnum,pix_range=(31,38)):
 
 def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\\GitHub\\Goos-Hanchen\\Reduced_data\\'):
     '''Saves the intensity data into a text file.'''
-    SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')
-    SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
+    #SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')  #monitor normalization issue?
+    #SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
+    SaveAscii(str(run_num)+'_polAll',path+new_name+'_pol'+'.txt')
 
 #####################################################
 #                  Data reduction                   #
@@ -122,7 +123,12 @@ binning='2.5,0.05,13.3'  #wavelength binning
 blanks = [i for i in range(79096,79098)] + [i for i in range(79120,79127)] + \
          [i for i in range(79167,79170)]
 quickpolAlanis(blanks,binning)
-save_Mantid_output(79096,new_name='Blank_all')
+save_Mantid_output(79096,new_name='blank')
+
+
+
+
+
 
 
 
