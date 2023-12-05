@@ -95,7 +95,7 @@ def convertToQ(wksp,specPixel,th0):
 
 def plot_q(rnum,pix_range=(31,38)):
     '''Plots q-corrected polarization (pixel range is inclusive).'''
-    temp = ADS.retrieve(str(rnum)+'_polAllNorm_Q')
+    temp = ADS.retrieve(str(rnum)+'_polAll_Q')
     fig, axes = plt.subplots(edgecolor='#ffffff', figsize=[8.3211, 6.1284], num=str(rnum)+'_polAllNorm_Q-2', subplot_kw={'projection': 'mantid'})
     magic_number = 41002  #conversion between what the DAC calls the detector pixel in two separate places?
     for indx,pix in enumerate(range(pix_range[0],pix_range[-1]+1)):
@@ -114,41 +114,31 @@ def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\
     #SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')  #monitor normalization issue?
     #SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
     SaveAscii(str(run_num)+'_polAll',path+new_name+'_pol'+'.txt')
+    SaveAscii(str(run_num)+'_pol',path+new_name+'_pol_av'+'.txt')
 
 #####################################################
 #                  Data reduction                   #
 #####################################################
 binning='2.5,0.05,13.3'  #wavelength binning
 
+#Blank, sample that was used for normalization
 blanks = [i for i in range(79096,79098)] + [i for i in range(79120,79127)] + \
          [i for i in range(79167,79170)]
 quickpolAlanis(blanks,binning)
+convertToQ('79096_polAll',41005,0.35)
+plot_q(79096)
 save_Mantid_output(79096,new_name='blank')
 
-
-
-
-
-
-
-
-#Polarization normalization using the NiMo non-magnetic blank
-quickpolAlanis(79096,binning)
-avPol=SumSpectra('79096_polAll',30,36)  #using the center 7 pixels (each ~0.6 mm)
-avPol=avPol/7.0
-Fit(Function='name=Polynomial,n=2,A0=0.952356,A1=-0.00345038,A2=-0.00201979', InputWorkspace='avPol', Output='avPol', OutputCompositeMembers=True, StartX=4, EndX=11.675817151262118)
-avPolpoint=avPol*1.0
-avPolpoint=ConvertToPointData(avPolpoint)
-X1=avPolpoint.dataX(0)
-pars=mtd['avPol_Parameters']
-Y1=np.zeros(len(X1))
-E1=np.zeros(len(X1))
-for i in range(len(X1)):
-    Y1[i]=pars.cell(0,1)+X1[i]*pars.cell(1,1)+X1[i]*X1[i]*pars.cell(2,1)
-avPolFit=CreateWorkspace(avPol.dataX(0),Y1,E1,NSpec=1,UnitX='Wavelength')
-
-
 #Perpendicular magnetic sample (M perp B_guide)
+perp = range(79100,79116)
+quickpolAlanis(perp,binning)
+save_Mantid_output(79100,new_name='perp')
+convertToQ('79100_polAll',41005,0.35)
+plot_q(79100)
+
+
+
+
 quickpolAlanis(range(79100,79116),binning)
 get_norm(79100)
 convertToQ('79100_polAllNorm',41005,0.35)
