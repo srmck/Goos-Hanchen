@@ -136,72 +136,46 @@ save_Mantid_output(79100,new_name='perp')
 convertToQ('79100_polAll',41005,0.35)
 plot_q(79100)
 
-
-
-
-quickpolAlanis(range(79100,79116),binning)
-get_norm(79100)
-convertToQ('79100_polAllNorm',41005,0.35)
-plot_q(79100)
-
-#Parallel magnetic sample
-quickpolAlanis(range(79130,79143),binning)
-get_norm(79130)
-convertToQ('79130_polAllNorm',41005,0.35)
+#Parallel magnetic sample (M parallel B_guide), incident angle 0.35 degrees
+para_p35 = range(79130,79143)
+quickpolAlanis(para_p35,binning)
+save_Mantid_output(79130,new_name='para_p35')
+convertToQ('79130_polAll',41005,0.35)
 plot_q(79130)
 
-#Quick grating before sample check
-quickpolAlanis(range(79143,79145),binning)
+#Parallel magnetic sample (M parallel B_guide), incident angle 0.35 degrees
+para_p35 = range(79130,79143)
+quickpolAlanis(para_p35,binning)
+save_Mantid_output(79130,new_name='para_p35')
+convertToQ('79130_polAll',41005,0.35)
+plot_q(79130)
 
-#Quick grating after sample check
-binning='2.0,0.1,13.3'  #wavelength binning
-quickpolAlanis(range(79145,79159),binning)
-
-
-quickpolAlanis(79100,binning)
-Divide('79100_polAll',avPolFit,OutputWorkspace='79100_polAllNorm')
-
-quickpolAlanis(range(79120,79125),binning)
-Divide('79120_polAll',avPolFit,OutputWorkspace='79120_polAllNorm')
-
-quickpolAlanis(79120,binning)
-convertToQ('79120_polAllNorm',41005,0.35)
-Divide('79120_polAll',avPolFit,OutputWorkspace='79120_polAllNorm')
-
-quickpolAlanis(range(79130,79142),binning)
-Divide('79130_polAll',avPolFit,OutputWorkspace='79130_polAllNorm')
-convertToQ('79130_polAllNorm',41005,0.35)
-
-quickpolAlanis(79143,binning)
-Divide('79143_polAll',avPolFit,OutputWorkspace='79143_polAllNorm')
-convertToQ('79143_polAllNorm',41005,0.35)
+#Parallel magnetic sample, incident angle 0.35 degrees, grating after sample
+para_p35_after = [i for i in range(79143,79145)] + [i for i in range(79160,79165)]
+quickpolAlanis(para_p35_after,binning)
+save_Mantid_output(79143,new_name='para_p35_after')
+convertToQ('79143_polAll',41005,0.35)
 plot_q(79143)
 
-quickpolAlanis(79144,binning)
-Divide('79144_pol',avPolFit,OutputWorkspace='79144_polNorm')
-
-convertToQ('79101_polAllNorm',41005,0.35)
-
-
-quickpolAlanis(range(79160,79165),binning)
-
-quickpolAlanis(79167,'2.0,0.5,13.3')
-
-temp = [i for i in range(79172,79174)]+[i for i in range(79167,79170)]+[i for i in range(79120,79127)]
-print(temp)
-quickpolAlanis(temp,binning)
-
-quickpolAlanis(range(79067,79091),binning)
-
-quickpolAlanis(range(79179,79189),binning)
+#Parallel magnetic sample, incident angle 0.35 degrees, grating before sample
+para_p35_before = [i for i in range(79145,79160)]
+quickpolAlanis(para_p35_before,binning)
+save_Mantid_output(79145,new_name='para_p35_before')
+convertToQ('79145_polAll',41005,0.35)
+plot_q(79145)
 
 
 
-quickpolAlanis(range(79189,79196),binning)  #grating before sample
 
 
-# variable binning is easy enough steps of 0.05 up to 6.5Ang and then 0.1 after
-binning="2.0,0.05,6.5,0.1,13.3"
-quickpolAlanis(range(79189,79196),binning)  #grating before sample
-convertToQ('79189_polAll',41005,0.4)
+
+
+
+
+
+
+
+
+
+
 
