@@ -109,17 +109,19 @@ def plot_q(rnum,pix_range=(31,38)):
     legend = axes.legend(fontsize=8.0).set_draggable(True).legend
     plt.show()
 
-def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\\GitHub\\Goos-Hanchen\\Reduced_data\\'):
+def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\\GitHub\\Goos-Hanchen\\Reduced_data\\',lams=False):
     '''Saves the intensity data into a text file.'''
-    #SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')  #monitor normalization issue?
-    #SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
-    SaveAscii(str(run_num)+'_polAll',path+new_name+'_pol'+'.txt')
-    SaveAscii(str(run_num)+'_pol',path+new_name+'_pol_av'+'.txt')
+    if lams:
+        SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')  #monitor normalization issue?
+        SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
+    else:
+        SaveAscii(str(run_num)+'_polAll',path+new_name+'_pol'+'.txt')
+        SaveAscii(str(run_num)+'_pol',path+new_name+'_pol_av'+'.txt')
 
 #####################################################
 #                  Data reduction                   #
 #####################################################
-binning='2.5,0.05,13.3'  #wavelength binning
+binning='3.0,0.075,12.0'  #wavelength binning
 
 #Blank, sample that was used for normalization
 blanks = [i for i in range(79096,79098)] + [i for i in range(79120,79127)] + \
@@ -128,6 +130,7 @@ quickpolAlanis(blanks,binning)
 convertToQ('79096_polAll',41005,0.35)
 plot_q(79096)
 save_Mantid_output(79096,new_name='blank')
+save_Mantid_output(79096,new_name='blank',lams=True)  #intensities?
 
 #Perpendicular magnetic sample (M perp B_guide)
 perp = range(79100,79116)
