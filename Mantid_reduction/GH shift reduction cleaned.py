@@ -111,59 +111,47 @@ def plot_q(rnum,pix_range=(31,38)):
 
 def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\\GitHub\\Goos-Hanchen\\Reduced_data\\',lams=False):
     '''Saves the intensity data into a text file.'''
-    if lams:
-        SaveAscii(str(run_num)+'_lam_1',path+new_name+'_up'+'.txt')  #monitor normalization issue?
-        SaveAscii(str(run_num)+'_lam_2',path+new_name+'_dn'+'.txt')
-    else:
-        SaveAscii(str(run_num)+'_polAll',path+new_name+'_pol'+'.txt')
-        SaveAscii(str(run_num)+'_pol',path+new_name+'_pol_av'+'.txt')
+    SaveAscii(str(run_num)+'_lam_1',path+new_name+'up'+'.txt')  #monitor normalization issue?
+    SaveAscii(str(run_num)+'_lam_2',path+new_name+'dn'+'.txt')
+    SaveAscii(str(run_num)+'_polAll',path+new_name+'pol'+'.txt')
+    SaveAscii(str(run_num)+'_pol',path+new_name+'pol_av'+'.txt')
 
 #####################################################
 #                  Data reduction                   #
 #####################################################
-binning='3.0,0.075,12.0'  #wavelength binning
+binning='2.5,0.05,13.0'  #wavelength binning
 
 #Blank, sample that was used for normalization
 blanks = [i for i in range(79096,79098)] + [i for i in range(79120,79127)] + \
          [i for i in range(79167,79170)]
 quickpolAlanis(blanks,binning)
-convertToQ('79096_polAll',41005,0.35)
-plot_q(79096)
-save_Mantid_output(79096,new_name='blank')
-save_Mantid_output(79096,new_name='blank',lams=True)  #intensities?
+save_Mantid_output(79096,new_name=r'blank\\')
 
 #Perpendicular magnetic sample (M perp B_guide)
 perp = range(79100,79116)
 quickpolAlanis(perp,binning)
-save_Mantid_output(79100,new_name='perp')
+save_Mantid_output(79100,new_name=r'perp_p35\\')
 convertToQ('79100_polAll',41005,0.35)
 plot_q(79100)
 
 #Parallel magnetic sample (M parallel B_guide), incident angle 0.35 degrees
 para_p35 = range(79130,79143)
 quickpolAlanis(para_p35,binning)
-save_Mantid_output(79130,new_name='para_p35')
+save_Mantid_output(79130,new_name=r'para_p35\\')
 convertToQ('79130_polAll',41005,0.35)
 plot_q(79130)
 
-#Parallel magnetic sample (M parallel B_guide), incident angle 0.35 degrees
-para_p35 = range(79130,79143)
-quickpolAlanis(para_p35,binning)
-save_Mantid_output(79130,new_name='para_p35')
-convertToQ('79130_polAll',41005,0.35)
-plot_q(79130)
-
-#Parallel magnetic sample, incident angle 0.35 degrees, grating after sample
+#Parallel magnetic sample, incident angle 0.35 degrees, grating AFTER sample
 para_p35_after = [i for i in range(79143,79145)] + [i for i in range(79160,79165)]
 quickpolAlanis(para_p35_after,binning)
-save_Mantid_output(79143,new_name='para_p35_after')
+save_Mantid_output(79143,new_name=r'para_p35_after\\')
 convertToQ('79143_polAll',41005,0.35)
 plot_q(79143)
 
-#Parallel magnetic sample, incident angle 0.35 degrees, grating before sample
+#Parallel magnetic sample, incident angle 0.35 degrees, grating BEFORE sample
 para_p35_before = [i for i in range(79145,79160)]
 quickpolAlanis(para_p35_before,binning)
-save_Mantid_output(79145,new_name='para_p35_before')
+save_Mantid_output(79145,new_name=r'para_p35_before\\')
 convertToQ('79145_polAll',41005,0.35)
 plot_q(79145)
 
