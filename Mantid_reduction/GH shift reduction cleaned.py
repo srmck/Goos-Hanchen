@@ -155,13 +155,25 @@ save_Mantid_output(79145,new_name=r'para_p35_before\\')
 convertToQ('79145_polAll',41005,0.35)
 plot_q(79145)
 
+#----------------------------------------------------------------------------#
+#Parallel magnetic sample, incident angle 0.4 degrees, no grating
+para_p40 = [i for i in range(79179,79189)]
+quickpolAlanis(para_p40,binning)
+save_Mantid_output(79179,new_name=r'para_p40\\')
+convertToQ('79179_polAll',41005,0.35)
+plot_q(79179)
 
+#Parallel magnetic sample, incident angle 0.4 degrees, grating AFTER sample
+para_p40_after = [i for i in range(79189,79200)]
+quickpolAlanis(para_p40_after,binning)
+save_Mantid_output(79189,new_name=r'para_p40_after\\')
+convertToQ('79189_polAll',41005,0.35)
+plot_q(79189)
 
-
-
-
-
-
+#Parallel magnetic sample, incident angle 0.4 degrees, grating BEFORE sample
+para_p40_before = [i for i in range(79200,79213)]
+quickpolAlanis(para_p40_before,binning)
+save_Mantid_output(79200,new_name=r'para_p40_before\\')
 
 
 
