@@ -176,11 +176,22 @@ def save_Mantid_output(run_num,new_name='',path=r'C:\\Users\\samckay\\Documents\
 #####################################################
 binning='2.5,0.05,13.0'  #wavelength binning
 
-#Blank, sample that was used for normalization
-blanks = [i for i in range(79096,79098)] + [i for i in range(79120,79127)] + \
-         [i for i in range(79167,79170)]
+#Blank, NiMo sample that was used for normalization
+blank_perp = [i for i in range(79096,79098)]
+quickpolAlanis(blank_perp,binning)
+save_Mantid_output(79096,new_name=r'blank_perp\\')
+
+blank_para1 = [i for i in range(79120,79127)]
+quickpolAlanis(blank_para1,binning)
+save_Mantid_output(79120,new_name=r'blank_para1\\')
+
+blank_para2 = [i for i in range(79167,79170)]
+quickpolAlanis(blank_para2,binning)
+save_Mantid_output(79167,new_name=r'blank_para2\\')
+
+blanks = blank_perp + blank_para1 + blank_para2
 quickpolAlanis(blanks,binning)
-save_Mantid_output(79096,new_name=r'blank\\')
+save_Mantid_output(79096,new_name=r'blank_all\\')
 
 #Perpendicular magnetic sample (M perp B_guide)
 perp = range(79100,79116)
