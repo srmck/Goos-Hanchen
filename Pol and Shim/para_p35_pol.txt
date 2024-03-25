@@ -2,7 +2,7 @@
 # 	 Col 1: qlam_blank
 # 	 Col 2: para_p35_rb_norm
 # 	 Col 3: para_p35_err_rb_norm
-# Time saved: 2024-03-24 15:24
+# Time saved: 2024-03-25 08:34
 # Other notes: -
 # ---------------------------------------- #
 # Wavelength Pol Error 
