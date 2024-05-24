@@ -2,7 +2,7 @@
 # 	 Col 1: qlam_blank
 # 	 Col 2: perp_rb_norm
 # 	 Col 3: perp_err_rb_norm
-# Time saved: 2024-05-16 08:28
+# Time saved: 2024-05-22 16:43
 # Other notes: -
 # ---------------------------------------- #
 # Wavelength Pol Error 
